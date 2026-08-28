@@ -1,0 +1,239 @@
+@use 'mixins' as *;
+
+.public-booking {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  background:
+    radial-gradient(600px 400px at 90% 0%, var(--color-primary-100), transparent 60%),
+    var(--surface-page);
+
+  @include tablet {
+    padding: var(--space-8);
+  }
+}
+
+.public-booking__card {
+  width: 100%;
+  max-width: 480px;
+  background: var(--surface-card);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-lg);
+  padding: var(--space-6);
+
+  @include tablet {
+    padding: var(--space-8);
+  }
+}
+
+.public-booking__powered {
+  margin-top: var(--space-4);
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+// --- Compartido por los pasos ---
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  animation: fade-up var(--transition-base) both;
+
+  h2 {
+    font-size: var(--text-xl);
+  }
+}
+
+.step--center {
+  align-items: center;
+  text-align: center;
+}
+
+.step__subtitle {
+  color: var(--text-secondary);
+  font-size: var(--text-sm);
+}
+
+.step__empty {
+  font-size: var(--text-sm);
+  color: var(--text-muted);
+  padding: var(--space-6) 0;
+  text-align: center;
+}
+
+.step__error {
+  background: var(--color-danger-50);
+  color: var(--color-danger-600);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  margin: 0;
+}
+
+.step__nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+// --- Selección de servicio ---
+.service-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.service-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border: 1.5px solid var(--border-default);
+  border-radius: var(--radius-md);
+  background: var(--surface-card);
+  cursor: pointer;
+  text-align: left;
+  min-height: 56px;
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+
+  &:hover {
+    border-color: var(--color-primary-500);
+    background: var(--color-primary-50);
+  }
+
+  strong {
+    display: block;
+    font-size: var(--text-base);
+  }
+  small {
+    display: block;
+    color: var(--text-secondary);
+    font-size: var(--text-xs);
+    margin-top: 2px;
+  }
+}
+
+.service-option__duration {
+  display: inline-block;
+  margin-top: var(--space-1);
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+.service-option__deposit {
+  display: block;
+  margin-top: var(--space-1);
+  font-size: var(--text-xs);
+  color: var(--color-primary-600);
+  font-weight: 600;
+}
+
+.service-option__price {
+  font-weight: 800;
+  font-size: var(--text-lg);
+  color: var(--color-primary-700);
+  flex-shrink: 0;
+}
+
+// --- Selección de profesional ---
+.staff-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+
+.staff-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-5) var(--space-3);
+  border: 1.5px solid var(--border-default);
+  border-radius: var(--radius-md);
+  background: var(--surface-card);
+  cursor: pointer;
+  min-height: 56px;
+  transition: border-color var(--transition-fast), background var(--transition-fast);
+
+  &:hover {
+    border-color: var(--color-primary-500);
+    background: var(--color-primary-50);
+  }
+
+  strong {
+    font-size: var(--text-sm);
+    text-align: center;
+  }
+}
+
+.staff-option__avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--color-primary-100);
+  color: var(--color-primary-700);
+  font-weight: 700;
+  font-size: var(--text-sm);
+}
+
+// --- Fecha y hora ---
+.native-date {
+  height: 48px;
+  border: 1.5px solid var(--border-default);
+  border-radius: var(--radius-md);
+  padding-inline: var(--space-3);
+  font-size: var(--text-base);
+  color: var(--text-primary);
+  background: var(--surface-card);
+  width: 100%;
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary-500);
+    outline-offset: 2px;
+  }
+}
+
+.chip-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.chip {
+  min-width: 64px;
+  min-height: 44px;
+  padding: var(--space-2) var(--space-3);
+  border: 1.5px solid var(--border-default);
+  border-radius: var(--radius-md);
+  background: var(--surface-card);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  cursor: pointer;
+  transition: border-color var(--transition-fast), background var(--transition-fast), color var(--transition-fast);
+
+  &--selected {
+    border-color: var(--color-primary-600);
+    background: var(--color-primary-600);
+    color: white;
+  }
+}
+
+// --- Confirmación ---
+.confirmation-icon {
+  font-size: 3rem;
+  animation: fade-up var(--transition-slow) both;
+}
+
+.confirmation-note {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}

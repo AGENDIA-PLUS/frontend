@@ -1,0 +1,19 @@
+@use 'mixins' as *;
+
+.card {
+  @include card-surface;
+  transition:
+    box-shadow var(--transition-base),
+    transform var(--transition-base),
+    border-color var(--transition-base);
+}
+
+.card--padded {
+  padding: var(--space-5);
+}
+
+.card--hoverable:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary-200);
+  transform: translateY(-2px);
+}

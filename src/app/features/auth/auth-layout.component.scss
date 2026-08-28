@@ -1,0 +1,119 @@
+@use 'mixins' as *;
+
+.auth {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+
+  @include desktop {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.auth__panel {
+  display: none;
+  position: relative;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-10);
+  background:
+    radial-gradient(600px 400px at 20% 0%, rgb(255 255 255 / 0.08), transparent),
+    linear-gradient(160deg, var(--color-primary-700), var(--color-ink-950));
+  color: white;
+
+  @include desktop {
+    display: flex;
+  }
+}
+
+.auth__panel-content {
+  max-width: 420px;
+
+  h2 {
+    color: white;
+    font-size: var(--text-3xl);
+  }
+
+  p {
+    margin-top: var(--space-4);
+    color: rgb(255 255 255 / 0.75);
+    font-size: var(--text-base);
+  }
+}
+
+.auth__points {
+  margin-top: var(--space-8);
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-size: var(--text-sm);
+    color: rgb(255 255 255 / 0.85);
+
+    &::before {
+      content: '✓';
+      display: grid;
+      place-items: center;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgb(255 255 255 / 0.15);
+      font-size: 0.65rem;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+  }
+}
+
+.auth__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--text-lg);
+  color: inherit;
+
+  &--mobile {
+    color: var(--text-primary);
+    padding: var(--space-6) var(--space-6) 0;
+
+    @include desktop {
+      display: none;
+    }
+  }
+}
+
+.auth__brand-mark {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md);
+  background: rgb(255 255 255 / 0.15);
+  font-size: var(--text-sm);
+}
+
+.auth__form-side {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-page);
+}
+
+.auth__form-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+
+  @include tablet {
+    padding: var(--space-10);
+  }
+}

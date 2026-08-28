@@ -1,0 +1,62 @@
+@use 'mixins' as *;
+
+.wa-conn__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+
+  h2 {
+    font-size: var(--text-lg);
+  }
+}
+
+.wa-conn__hint {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-5);
+  max-width: 60ch;
+}
+
+.wa-conn__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: 420px;
+}
+
+.wa-conn__error {
+  background: var(--color-danger-50);
+  color: var(--color-danger-600);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  margin: 0;
+}
+
+.wa-conn__success {
+  background: var(--color-success-50);
+  color: var(--color-success-600);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  margin: 0;
+}
+
+.wa-conn__actions {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.wa-conn__docs {
+  margin-top: var(--space-5);
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  max-width: 60ch;
+
+  a {
+    color: var(--color-primary-600);
+    font-weight: 600;
+  }
+}

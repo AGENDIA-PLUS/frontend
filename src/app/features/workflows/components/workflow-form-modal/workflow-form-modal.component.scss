@@ -1,0 +1,172 @@
+@use 'mixins' as *;
+
+.wf-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.wf-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.wf-form__label {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.wf-form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.wf-form__row--3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.wf-form__textarea {
+  border: 1.5px solid var(--border-default);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  resize: vertical;
+  min-height: 56px;
+  width: 100%;
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary-500);
+    outline-offset: 2px;
+  }
+}
+
+.wf-form__hint {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+}
+
+.wf-form__error {
+  background: var(--color-danger-50);
+  color: var(--color-danger-600);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  margin: 0;
+}
+
+.wf-form__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+}
+
+// --- Flujo de acciones ---
+.wf-flow {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.wf-flow__step {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  background: var(--color-gray-50);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+  position: relative;
+
+  // Sustituye a las flechas "↓" que había antes como elementos de DOM
+  // aparte: con drag-and-drop, esos elementos sueltos entre los pasos
+  // arrastrables complicaban que el CDK calculara bien las posiciones de
+  // soltado. Una flecha vía ::after no forma parte de la lista de arrastre.
+  &:not(:last-child)::after {
+    content: '↓';
+    position: absolute;
+    left: 50%;
+    bottom: calc(-1 * var(--space-4) - 2px);
+    transform: translateX(-50%);
+    color: var(--text-muted);
+    font-size: var(--text-lg);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  // Estado mientras el CDK está calculando dónde soltar: hueco donde
+  // quedaría el paso, para que el resto de la lista no salte de golpe.
+  &.cdk-drag-placeholder {
+    opacity: 0.3;
+    border: 1px dashed var(--color-primary-400);
+  }
+
+  &.cdk-drag-animating {
+    transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+.wf-flow.cdk-drop-list-dragging .wf-flow__step:not(.cdk-drag-placeholder) {
+  transition: transform 200ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.wf-flow__drag-handle {
+  cursor: grab;
+  color: var(--text-muted);
+  font-size: var(--text-lg);
+  line-height: 1;
+  padding: 0 var(--space-1);
+  user-select: none;
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+// Tarjeta compacta que sigue al cursor mientras se arrastra un paso —
+// mostrar el formulario completo (textarea, selects...) sería ruidoso.
+.wf-flow__drag-preview {
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  background: var(--color-primary-600);
+  color: white;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  box-shadow: 0 8px 20px rgb(0 0 0 / 0.25);
+}
+
+.wf-flow__step-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+
+  strong {
+    flex: 1;
+    font-size: var(--text-sm);
+  }
+}
+
+.wf-flow__remove {
+  background: none;
+  border: none;
+  color: var(--color-danger-500);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.wf-add-action {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-end;
+  margin-top: var(--space-2);
+
+  app-select {
+    flex: 1;
+  }
+}

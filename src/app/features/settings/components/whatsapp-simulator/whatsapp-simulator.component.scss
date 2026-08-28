@@ -1,0 +1,109 @@
+@use 'mixins' as *;
+
+.sim__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+
+  h2 {
+    font-size: var(--text-lg);
+  }
+}
+
+.sim__hint {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  margin-bottom: var(--space-5);
+  max-width: 60ch;
+}
+
+.sim__phone {
+  max-width: 380px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  overflow: hidden;
+}
+
+.sim__chat {
+  background: #e9edf3;
+  padding: var(--space-4);
+  min-height: 320px;
+  max-height: 420px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.sim__empty {
+  margin: auto;
+  text-align: center;
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  max-width: 200px;
+}
+
+.sim__bubble {
+  align-self: flex-end;
+  max-width: 85%;
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-lg);
+  border-bottom-right-radius: var(--radius-sm);
+  background: var(--color-whatsapp);
+  color: white;
+  font-size: var(--text-sm);
+  white-space: pre-line;
+  line-height: 1.4;
+  animation: fade-up var(--transition-fast) both;
+}
+
+.sim__bubble--bot {
+  align-self: flex-start;
+  background: white;
+  color: var(--text-primary);
+  border-bottom-right-radius: var(--radius-lg);
+  border-bottom-left-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+}
+
+.sim__bubble--typing {
+  opacity: 0.6;
+  font-style: italic;
+}
+
+.sim__input-row {
+  display: flex;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  background: var(--surface-card);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.sim__input {
+  flex: 1;
+  height: 38px;
+  border: 1.5px solid var(--border-default);
+  border-radius: var(--radius-full);
+  padding-inline: var(--space-4);
+  font-size: var(--text-sm);
+
+  &:focus-visible {
+    outline: 2px solid var(--color-primary-500);
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    background: var(--color-gray-50);
+  }
+}
+
+.sim__error {
+  margin-top: var(--space-3);
+  background: var(--color-danger-50);
+  color: var(--color-danger-600);
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+}

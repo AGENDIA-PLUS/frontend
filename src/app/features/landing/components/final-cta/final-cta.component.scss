@@ -1,0 +1,30 @@
+@use 'mixins' as *;
+
+.final-cta {
+  padding-block: var(--space-16);
+  background: linear-gradient(135deg, var(--color-primary-700), var(--color-primary-500));
+}
+
+.final-cta__inner {
+  @include container;
+  max-width: 640px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+
+  h2 {
+    color: white;
+    font-size: var(--text-3xl);
+
+    @include tablet {
+      font-size: var(--text-4xl);
+    }
+  }
+
+  p {
+    color: rgb(255 255 255 / 0.85);
+    font-size: var(--text-lg);
+  }
+}

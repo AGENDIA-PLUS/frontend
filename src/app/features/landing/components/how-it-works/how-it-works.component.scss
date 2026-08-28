@@ -1,0 +1,102 @@
+@use 'mixins' as *;
+
+.how {
+  padding-block: var(--space-16);
+  background: var(--surface-card);
+
+  @include desktop {
+    padding-block: var(--space-24);
+  }
+}
+
+.how__inner {
+  @include container;
+}
+
+.how__heading {
+  max-width: 640px;
+  margin-bottom: var(--space-12);
+
+  h2 {
+    font-size: var(--text-3xl);
+    margin-top: var(--space-3);
+
+    @include tablet {
+      font-size: var(--text-4xl);
+    }
+  }
+
+  p {
+    margin-top: var(--space-4);
+    color: var(--text-secondary);
+    font-size: var(--text-lg);
+  }
+}
+
+.how__eyebrow {
+  color: var(--color-primary-600);
+  font-weight: 700;
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.how__steps {
+  display: grid;
+  gap: var(--space-6);
+  grid-template-columns: repeat(1, 1fr);
+
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include desktop {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.how__step {
+  position: relative;
+  padding: var(--space-6);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  transition:
+    transform var(--transition-base),
+    box-shadow var(--transition-base);
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+
+  h3 {
+    font-size: var(--text-lg);
+    margin-top: var(--space-4);
+  }
+
+  p {
+    margin-top: var(--space-2);
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+  }
+}
+
+.how__step-icon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-md);
+  background: var(--color-primary-50);
+  font-size: var(--text-xl);
+}
+
+.how__step-number {
+  position: absolute;
+  top: var(--space-5);
+  right: var(--space-5);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: var(--text-sm);
+  color: var(--color-gray-300);
+}

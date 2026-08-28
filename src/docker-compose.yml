@@ -1,0 +1,31 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: saas_citas_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: saas_user
+      POSTGRES_PASSWORD: saas_password
+      POSTGRES_DB: saas_citas
+    ports:
+      - "5432:5432"
+    volumes:
+      - saas_citas_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U saas_user -d saas_citas"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # Redis se activará en el Bloque 5 (Workflow Engine / Queue). Se deja preparado.
+  redis:
+    image: redis:7-alpine
+    container_name: saas_citas_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+
+volumes:
+  saas_citas_pgdata:

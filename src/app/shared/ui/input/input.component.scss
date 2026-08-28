@@ -1,0 +1,82 @@
+@use 'mixins' as *;
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 100%;
+}
+
+.field__label {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.field__required {
+  color: var(--color-danger-500);
+  margin-left: 2px;
+}
+
+.field__control {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  border: 1.5px solid var(--border-default);
+  border-radius: var(--radius-md);
+  background: var(--surface-card);
+  padding-inline: var(--space-3);
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+
+  &:focus-within {
+    border-color: var(--color-primary-500);
+    box-shadow: 0 0 0 3px var(--color-primary-100);
+  }
+
+  &--error {
+    border-color: var(--color-danger-500);
+
+    &:focus-within {
+      box-shadow: 0 0 0 3px var(--color-danger-50);
+    }
+  }
+
+  input {
+    flex: 1;
+    height: 44px;
+    border: none;
+    background: transparent;
+    font-size: var(--text-base);
+    color: var(--text-primary);
+    outline: none;
+    min-width: 0;
+
+    &::placeholder {
+      color: var(--text-muted);
+    }
+
+    &:disabled {
+      color: var(--text-muted);
+      cursor: not-allowed;
+    }
+  }
+}
+
+.field__icon {
+  color: var(--text-muted);
+  font-size: var(--text-base);
+}
+
+.field__error {
+  font-size: var(--text-xs);
+  color: var(--color-danger-500);
+  margin: 0;
+}
+
+.field__hint {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  margin: 0;
+}

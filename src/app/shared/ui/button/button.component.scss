@@ -1,0 +1,130 @@
+@use 'mixins' as *;
+
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-family: var(--font-body);
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast),
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    opacity var(--transition-fast);
+  white-space: nowrap;
+  @include focus-ring;
+
+  &:active:not(:disabled) {
+    transform: translateY(1px);
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+}
+
+.btn--full {
+  width: 100%;
+}
+
+// Tamaños
+.btn--sm {
+  height: 34px;
+  padding: 0 var(--space-3);
+  font-size: var(--text-sm);
+}
+.btn--md {
+  height: 42px;
+  padding: 0 var(--space-5);
+  font-size: var(--text-sm);
+}
+.btn--lg {
+  height: 50px;
+  padding: 0 var(--space-6);
+  font-size: var(--text-base);
+}
+
+// Variantes
+.btn--primary {
+  background: var(--color-primary-600);
+  color: var(--text-inverted);
+  box-shadow: 0 1px 2px rgb(79 70 229 / 0.15);
+
+  &:hover:not(:disabled) {
+    background: var(--color-primary-700);
+    box-shadow: var(--shadow-glow-primary);
+  }
+}
+
+.btn--secondary {
+  background: var(--surface-card);
+  color: var(--text-primary);
+  border-color: var(--border-default);
+
+  &:hover:not(:disabled) {
+    background: var(--color-gray-50);
+    border-color: var(--color-gray-400);
+  }
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--text-secondary);
+
+  &:hover:not(:disabled) {
+    background: var(--color-gray-100);
+    color: var(--text-primary);
+  }
+}
+
+.btn--danger {
+  background: var(--color-danger-50);
+  color: var(--color-danger-600);
+
+  &:hover:not(:disabled) {
+    background: var(--color-danger-500);
+    color: var(--text-inverted);
+  }
+}
+
+.btn--whatsapp {
+  background: var(--color-whatsapp);
+  color: var(--text-inverted);
+
+  &:hover:not(:disabled) {
+    background: var(--color-whatsapp-dark);
+  }
+}
+
+.btn__content {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+
+  &--hidden {
+    opacity: 0;
+  }
+}
+
+.btn__spinner {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  animation: btn-spin 0.6s linear infinite;
+}
+
+@keyframes btn-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

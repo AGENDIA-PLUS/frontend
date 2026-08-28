@@ -1,0 +1,95 @@
+@use 'mixins' as *;
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgb(15 23 42 / 0.45);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 200;
+  animation: fade-up 180ms ease-out;
+
+  @include tablet {
+    align-items: center;
+  }
+}
+
+.modal {
+  width: 100%;
+  max-width: 480px;
+  max-height: 92vh;
+  // display:flex + flex-direction:column es lo que garantiza que SOLO
+  // .modal__body se desplaza y .modal__header queda siempre visible,
+  // independientemente de lo largo que sea el contenido — con el layout de
+  // bloque anterior (overflow-y en .modal + header en sticky) funcionaba en
+  // la mayoría de casos, pero no de forma robusta en todos los modales.
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-card);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  box-shadow: var(--shadow-lg);
+  animation: modal-in var(--transition-base) both;
+
+  @include tablet {
+    border-radius: var(--radius-xl);
+    margin: var(--space-6);
+  }
+}
+
+.modal--wide {
+  max-width: 640px;
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-5) var(--space-6);
+  border-bottom: 1px solid var(--border-subtle);
+  // Ya no necesita position:sticky: al ser hijo directo de un contenedor
+  // flex en columna, se queda arriba de forma natural sin encogerse,
+  // mientras que .modal__body (flex:1) es el único que crece/desplaza.
+  flex-shrink: 0;
+  background: var(--surface-card);
+
+  h2 {
+    font-size: var(--text-lg);
+  }
+}
+
+.modal__close {
+  background: none;
+  border: none;
+  font-size: var(--text-2xl);
+  line-height: 1;
+  color: var(--text-muted);
+  cursor: pointer;
+
+  &:hover {
+    color: var(--text-primary);
+  }
+}
+
+.modal__body {
+  padding: var(--space-6);
+  overflow-y: auto;
+  flex: 1;
+  // min-height:0 es imprescindible aquí: sin esto, un hijo flex tiende a no
+  // encogerse por debajo de su contenido intrínseco, y overflow-y:auto no
+  // llega a activarse nunca aunque el contenido sea larguísimo — es el
+  // "gotcha" clásico de flexbox + scroll interno.
+  min-height: 0;
+}
