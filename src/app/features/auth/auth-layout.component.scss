@@ -90,14 +90,14 @@
   }
 }
 
+// El logo real reemplaza la "A" de relleno que había antes. Sin fondo ni
+// borde propio: el icono blanco (panel oscuro) ya funciona solo sobre el
+// degradado; el icono a color (versión móvil, fondo claro) trae su propia
+// ficha con degradado incorporada, coherente con el navbar.
 .auth__brand-mark {
-  display: grid;
-  place-items: center;
   width: 32px;
   height: 32px;
-  border-radius: var(--radius-md);
-  background: rgb(255 255 255 / 0.15);
-  font-size: var(--text-sm);
+  flex-shrink: 0;
 }
 
 .auth__form-side {

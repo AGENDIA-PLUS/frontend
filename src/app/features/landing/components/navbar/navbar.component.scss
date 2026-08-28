@@ -34,17 +34,19 @@
   font-size: var(--text-lg);
   color: var(--text-primary);
   margin-right: auto;
+  transition: opacity var(--transition-fast);
+
+  &:hover {
+    opacity: 0.85;
+  }
 }
 
-.nav__brand-mark {
-  display: grid;
-  place-items: center;
+// Tamaño real del icono dentro del navbar (72px de alto) — sin esto, el SVG
+// se renderiza a su tamaño nativo (hasta 140px) y aplasta la barra entera.
+.nav__brand-logo {
   width: 32px;
   height: 32px;
-  border-radius: var(--radius-md);
-  background: linear-gradient(135deg, var(--color-primary-600), var(--color-primary-400));
-  color: white;
-  font-size: var(--text-sm);
+  flex-shrink: 0;
 }
 
 .nav__links {

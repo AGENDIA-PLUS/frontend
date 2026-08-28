@@ -11,8 +11,14 @@ import { ButtonComponent } from '../../../../shared/ui/button/button.component';
     <header class="nav" [class.nav--scrolled]="scrolled()">
       <div class="nav__inner">
         <a routerLink="/" class="nav__brand">
-          <span class="nav__brand-mark">A</span>
-          Agendia
+          <img
+            src="/assets/agendia-icon.svg"
+            alt="Agendia"
+            class="nav__brand-logo"
+            width="32"
+            height="32"
+          />
+          <span>Agendia</span>
         </a>
 
         <nav class="nav__links" aria-label="Navegación principal">

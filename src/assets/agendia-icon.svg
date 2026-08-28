@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 140" width="140" height="140" role="img">
+  <title>Agendia</title>
+  <desc>Icono de Agendia: burbuja de chat con check de confirmación sobre un fondo degradado índigo-violeta, con un pulso de notificación.</desc>
+  <defs>
+    <linearGradient id="agTileGrad" x1="0" y1="0" x2="140" y2="140" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4338CA"/>
+      <stop offset="1" stop-color="#8B5CF6"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="0" y="0" width="140" height="140" rx="34" fill="url(#agTileGrad)"/>
+
+  <line x1="14" y1="100" x2="30" y2="100" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" opacity="0.28"/>
+  <line x1="10" y1="112" x2="34" y2="112" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" opacity="0.18"/>
+
+  <path d="M30 32 h60 a16 16 0 0 1 16 16 v34 a16 16 0 0 1 -16 16 h-38 l-18 16 v-16 h-4 a16 16 0 0 1 -16 -16 v-34 a16 16 0 0 1 16 -16 z" fill="#FFFFFF"/>
+
+  <path d="M44 66 L62 82 L96 46" fill="none" stroke="#25D366" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <circle cx="112" cy="26" r="14" fill="none" stroke="#25D366" stroke-width="2" opacity="0.25"/>
+  <circle cx="112" cy="26" r="9" fill="none" stroke="#25D366" stroke-width="2" opacity="0.45"/>
+  <circle cx="112" cy="26" r="5.5" fill="#25D366"/>
+</svg>

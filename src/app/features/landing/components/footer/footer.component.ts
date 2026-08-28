@@ -11,7 +11,7 @@ import { RouterLink } from '@angular/router';
       <div class="footer__inner">
         <div class="footer__brand">
           <a routerLink="/" class="footer__logo">
-            <span class="footer__logo-mark">A</span>
+            <img src="/assets/agendia-icon-white.svg" alt="" class="footer__logo-mark" width="30" height="30" />
             Agendia
           </a>
           <p>La forma más sencilla de gestionar las citas de tu negocio y automatizar WhatsApp.</p>

@@ -18,7 +18,7 @@ interface NavItem {
     <div class="shell" [class.shell--sidebar-open]="sidebarOpen()">
       <aside class="shell__sidebar">
         <a routerLink="/app/dashboard" class="shell__brand">
-          <span class="shell__brand-mark">A</span>
+          <img src="/assets/agendia-icon-white.svg" alt="" class="shell__brand-mark" width="30" height="30" />
           Agendia
         </a>
 
@@ -101,8 +101,6 @@ export class ShellComponent {
   protected readonly auth = inject(AuthService);
   readonly sidebarOpen = signal(false);
 
-  // Aviso descartable por sesión de navegador: no es un bloqueo (el email
-  // sin verificar no impide usar la app), solo un recordatorio suave.
   private readonly bannerDismissed = signal(sessionStorage.getItem('agendia-verify-banner-dismissed') === '1');
   readonly resending = signal(false);
   readonly resendMessage = signal('');
@@ -132,11 +130,6 @@ export class ShellComponent {
     });
   }
 
-  // Solo Dashboard está implementado (Bloque de frontend actual). El resto
-  // queda visible en la navegación para transmitir la estructura completa
-  // del producto, pero deshabilitado con un indicador claro de "Pronto"
-  // hasta que se construya cada módulo — así se evita enlazar a rutas
-  // inexistentes o mostrar datos inventados.
   readonly navItems: NavItem[] = [
     { label: 'Dashboard', icon: '🏠', route: '/app/dashboard', available: true },
     { label: 'Estadísticas', icon: '📊', route: '/app/estadisticas', available: true },

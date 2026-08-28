@@ -10,7 +10,7 @@ import { RouterLink } from '@angular/router';
     <div class="auth">
       <div class="auth__panel">
         <a routerLink="/" class="auth__brand">
-          <span class="auth__brand-mark">A</span>
+          <img src="./assets/agendia-icon-white.svg" alt="" class="auth__brand-mark" width="32" height="32" />
           Agendia
         </a>
 
@@ -28,7 +28,7 @@ import { RouterLink } from '@angular/router';
 
       <div class="auth__form-side">
         <a routerLink="/" class="auth__brand auth__brand--mobile">
-          <span class="auth__brand-mark">A</span>
+          <img src="./assets/agendia-icon.svg" alt="" class="auth__brand-mark auth__brand-mark--color" width="32" height="32" />
           Agendia
         </a>
         <div class="auth__form-wrapper">

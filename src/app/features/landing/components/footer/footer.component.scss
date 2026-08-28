@@ -37,14 +37,12 @@
   color: white;
 }
 
+// Logo real en vez de la "A" de relleno con degradado — icono blanco porque
+// el footer tiene fondo oscuro (--color-ink-950), igual que el sidebar.
 .footer__logo-mark {
-  display: grid;
-  place-items: center;
   width: 30px;
   height: 30px;
-  border-radius: var(--radius-md);
-  background: linear-gradient(135deg, var(--color-primary-500), var(--color-primary-300));
-  font-size: var(--text-sm);
+  flex-shrink: 0;
 }
 
 .footer__columns {
