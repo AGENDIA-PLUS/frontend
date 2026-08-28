@@ -1,0 +1,7 @@
+{
+  "rewrites": [
+    { "source": "/sitemap.xml", "destination": "https://backend-production-83dd.up.railway.app/sitemap.xml" },
+    { "source": "/robots.txt", "destination": "https://backend-production-83dd.up.railway.app/robots.txt" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
