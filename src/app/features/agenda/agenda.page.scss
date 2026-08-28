@@ -25,6 +25,14 @@
   }
 }
 
+.agenda__reschedule-error {
+  background: var(--color-danger-50);
+  color: var(--color-danger-600);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+}
+
 .agenda__toolbar {
   display: flex;
   align-items: center;

@@ -59,7 +59,7 @@
   border: 1px solid transparent;
   padding: var(--space-1) var(--space-2);
   text-align: left;
-  cursor: pointer;
+  cursor: grab;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -78,6 +78,23 @@
     transform: translateY(-1px);
     box-shadow: var(--shadow-sm);
     z-index: 3;
+  }
+
+  // Feedback visual mientras se arrastra (sección "drag and drop en
+  // Agenda") — el CDK añade estas clases automáticamente durante el gesto.
+  &.cdk-drag-preview {
+    box-shadow: var(--shadow-lg);
+    z-index: 10;
+    cursor: grabbing;
+    opacity: 0.95;
+  }
+
+  &.cdk-drag-placeholder {
+    opacity: 0.25;
+  }
+
+  &.cdk-drag-dragging {
+    cursor: grabbing;
   }
 }
 

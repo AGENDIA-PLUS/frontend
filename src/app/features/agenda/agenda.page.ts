@@ -9,7 +9,7 @@ import { ButtonComponent } from '../../shared/ui/button/button.component';
 import { CardComponent } from '../../shared/ui/card/card.component';
 import { SkeletonComponent } from '../../shared/ui/skeleton/skeleton.component';
 import { EmptyStateComponent } from '../../shared/ui/empty-state/empty-state.component';
-import { AgendaDayViewComponent } from './components/day-view/day-view.component';
+import { AgendaDayViewComponent, AppointmentRescheduleRequest } from './components/day-view/day-view.component';
 import { AgendaWeekViewComponent } from './components/week-view/week-view.component';
 import { AppointmentModalComponent } from './components/appointment-modal/appointment-modal.component';
 
@@ -39,6 +39,10 @@ type ViewMode = 'day' | 'week';
         <app-button (clicked)="openCreateModal()">+ Nueva cita</app-button>
       </header>
 
+      @if (rescheduleError()) {
+        <p class="agenda__reschedule-error">{{ rescheduleError() }}</p>
+      }
+
       @if (!business()) {
         <app-card>
           <app-empty-state icon="🏪" title="Configura tu negocio primero" description="Necesitas completar el onboarding antes de ver tu agenda." />
@@ -65,7 +69,12 @@ type ViewMode = 'day' | 'week';
             <app-empty-state icon="🧑‍💼" title="Todavía no tienes profesionales" description="Añade un profesional para empezar a recibir citas en tu agenda." />
           </app-card>
         } @else if (view() === 'day') {
-          <app-agenda-day-view [staff]="staff()" [appointments]="appointments()" (select)="openViewModal($event)"></app-agenda-day-view>
+          <app-agenda-day-view
+            [staff]="staff()"
+            [appointments]="appointments()"
+            (select)="openViewModal($event)"
+            (rescheduled)="onDragRescheduled($event)"
+          ></app-agenda-day-view>
         } @else {
           <app-agenda-week-view [days]="weekDays()" [appointments]="appointments()" (select)="openViewModal($event)"></app-agenda-week-view>
         }
@@ -96,6 +105,7 @@ export class AgendaPageComponent {
   readonly view = signal<ViewMode>('day');
   readonly currentDate = signal(new Date());
   readonly loading = signal(false);
+  readonly rescheduleError = signal('');
 
   readonly staff = signal<Staff[]>([]);
   readonly services = signal<Service[]>([]);
@@ -193,5 +203,36 @@ export class AgendaPageComponent {
   openViewModal(appointment: Appointment): void {
     this.modalAppointment.set(appointment);
     this.modalOpen.set(true);
+  }
+
+  /**
+   * Reprogramar por arrastre (sección "drag and drop en Agenda"): la vista
+   * de día ya calculó la nueva hora/profesional a partir de dónde se soltó
+   * la cita; aquí solo se llama a la misma API de reprogramar que ya usa
+   * el modal. Si el nuevo hueco choca con otra cita del mismo profesional
+   * (el EXCLUDE constraint de Postgres lo rechaza — sección 59), se
+   * recarga para que la cita "vuelva" visualmente a su sitio real en vez
+   * de quedarse mostrando una posición que nunca se llegó a guardar.
+   */
+  onDragRescheduled(request: AppointmentRescheduleRequest): void {
+    const business = this.business();
+    if (!business) return;
+
+    this.rescheduleError.set('');
+
+    this.appointmentsService
+      .reschedule(business.id, request.appointment.id, {
+        startsAt: request.startsAt,
+        staffId: request.staffId,
+      })
+      .subscribe({
+        next: () => this.reload(),
+        error: (err) => {
+          this.rescheduleError.set(
+            err?.error?.message ?? 'No se pudo mover la cita a ese hueco (puede que choque con otra cita).',
+          );
+          this.reload(); // revierte la posición visual a los datos reales
+        },
+      });
   }
 }
